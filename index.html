@@ -213,7 +213,10 @@
             } else {
                 button.className = "seat-btn " + (reservedSeats.includes(seat) ? "reserved" : "");
                 button.onclick = () => {
-                    if (!reservedSeats.includes(seat)) {
+                    if (reservedSeats.includes(seat)) {
+                        alert("Bu koltuk doludur, lütfen başka bir koltuk seçin.");
+                    } else {
+                        // Seçili koltuk yoksa sadece seçili koltuğu vurgula
                         document.querySelectorAll(".seat-btn").forEach(btn => btn.classList.remove("selected"));
                         button.classList.add("selected");
                         document.getElementById("selectedSeat").value = seat;
@@ -223,6 +226,9 @@
 
             seatPlan.appendChild(button);
         });
+        
+        // Varsayılan olarak hiçbir koltuk seçili olmasın
+        document.getElementById("selectedSeat").value = "";
     }
 
     function submitReservation() {
